@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces */
+  --color-app: #F7F8FA;
+  --color-surface: #FFFFFF;
+  --color-subtle: #F1F5F9;
+  --color-line: #E2E8F0;
+  --color-control: #64748B;
+
+  /* Text */
+  --color-ink: #172033;
+  --color-muted: #475569;
+  --color-muted-soft: #64748B;
+
+  /* Brand */
+  --color-primary: #2563EB;
+  --color-primary-dark: #1D4ED8;
+  --color-teal: #0F766E;
+  --color-navy: #0F172A;
+
+  /* Severity */
+  --color-critical: #B91C1C;
+  --color-critical-bg: #FEF2F2;
+  --color-serious: #B45309;
+  --color-serious-bg: #FFF7ED;
+  --color-moderate: #A16207;
+  --color-moderate-bg: #FEFCE8;
+  --color-minor: #0369A1;
+  --color-minor-bg: #F0F9FF;
+  --color-success: #15803D;
+  --color-success-bg: #F0FDF4;
+
+  /* Fonts */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgb(23 32 51 / 0.04), 0 4px 16px rgb(23 32 51 / 0.06);
+}
+
+/* Page container: side margin yahin se control hota hai
+   max-width: 1280px = original, 1400px = thoda chaudha, 1480px = aur chaudha */
+@utility container-page {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 2vw, 2rem);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-app);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Links aur images drag nahi honge */
+  a,
+  img,
+  svg {
+    -webkit-user-drag: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Skip link: keyboard users ke liye */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Report print: sirf report dikhega */
+@media print {
+  #root { display: none !important; }
+  .print-root {
+    position: static !important;
+    overflow: visible !important;
+    background: #fff !important;
+    padding: 0 !important;
+  }
+  .print-root .report-panel {
+    box-shadow: none !important;
+    border: 0 !important;
+    max-height: none !important;
+  }
+  .no-print { display: none !important; }
+}
+/* Sidebar active tab: content area se judta hua curved shape */
+.nav-active {
+  position: relative;
+  z-index: 1;
+}
+.nav-active::before,
+.nav-active::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+.nav-active::before {
+  top: -20px;
+  background: radial-gradient(circle at 0 0, transparent 19px, var(--color-app) 20px);
+}
+.nav-active::after {
+  bottom: -20px;
+  background: radial-gradient(circle at 0 100%, transparent 19px, var(--color-app) 20px);
+}
