@@ -1,4 +1,4 @@
-'use strict'
+﻿'use strict'
 
 /*
  * AccessAudit AI backend entrypoint.
@@ -18,10 +18,10 @@ async function main() {
   const scanner = createScanner(config)
   const app = createApp({ store, config, scanner })
 
-  const server = app.listen(config.port, () => {
+  const server = app.listen(config.port, '0.0.0.0', () => {
     console.log(`AccessAudit backend listening on http://localhost:${config.port}`)
     console.log(`Scan storage: ${config.dataDir}`)
-    console.log(`Local (loopback) scan targets: ${config.allowLocalTargets ? 'ALLOWED — test mode, do not use in shared deployments' : 'blocked'}`)
+    console.log(`Local (loopback) scan targets: ${config.allowLocalTargets ? 'ALLOWED â€” test mode, do not use in shared deployments' : 'blocked'}`)
   })
 
   const shutdown = () => {
@@ -38,3 +38,4 @@ main().catch((err) => {
   console.error('Failed to start backend:', err)
   process.exit(1)
 })
+
