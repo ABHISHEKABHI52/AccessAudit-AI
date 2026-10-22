@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Accessibility test fixture</title>
+    <!-- TEST FIXTURE ONLY: this page intentionally contains known accessibility
+         violations (image with no alt, empty button, unlabelled input, empty
+         link, missing html lang) so automated scans have something real to
+         detect. It is never used as production content. -->
+  </head>
+  <body>
+    <h1>Known accessibility problems</h1>
+    <p>This fixture page is used by the backend test suite to verify that axe-core reports real findings.</p>
+
+    <!-- Violation: image-alt (no alt attribute) -->
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="120" height="80" />
+
+    <!-- Violation: button-name (no discernible text) -->
+    <button type="button"></button>
+
+    <!-- Violation: label (form input has no label) -->
+    <input type="text" name="username" />
+
+    <!-- Violation: link-name (link has no discernible text) -->
+    <a href="https://example.com/next"></a>
+  </body>
+</html>

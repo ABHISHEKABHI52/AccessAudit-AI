@@ -11,6 +11,7 @@ export default function ScanBox({ initialUrl = '', heading = 'Scan a website' })
   const navigate = useNavigate()
   const [url, setUrl] = useState(initialUrl)
   const [status, setStatus] = useState('idle') // idle | invalid | loading | failed
+  const [errorMsg, setErrorMsg] = useState('')
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -23,7 +24,9 @@ export default function ScanBox({ initialUrl = '', heading = 'Scan a website' })
     try {
       const { id: scanId } = await api.startScan(value)
       navigate(`/results/${scanId}`)
-    } catch {
+    } catch (err) {
+      // Surface the backend's honest error message (e.g. blocked target).
+      setErrorMsg(err?.message || 'Could not start the scan. Please try again.')
       setStatus('failed')
     }
   }
@@ -46,7 +49,10 @@ export default function ScanBox({ initialUrl = '', heading = 'Scan a website' })
             value={url}
             onChange={(e) => {
               setUrl(e.target.value)
-              if (status !== 'idle') setStatus('idle')
+              if (status !== 'idle') {
+                setStatus('idle')
+                setErrorMsg('')
+              }
             }}
             placeholder="https://example.com"
             aria-invalid={status === 'invalid'}
@@ -81,9 +87,9 @@ export default function ScanBox({ initialUrl = '', heading = 'Scan a website' })
             </p>
           )}
           {status === 'failed' && (
-            <p className="flex items-center gap-1.5 font-medium text-critical">
+            <p role="alert" className="flex items-center gap-1.5 font-medium text-critical">
               <AlertCircle size={16} aria-hidden="true" />
-              Could not start the scan. Please try again.
+              {errorMsg}
             </p>
           )}
         </div>

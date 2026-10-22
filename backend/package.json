@@ -1,0 +1,23 @@
+{
+  "name": "accessaudit-backend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Real accessibility scanning backend for AccessAudit AI (Express + Playwright + axe-core)",
+  "type": "commonjs",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test \"test/*.test.js\""
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "axe-core": "^4.10.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "playwright": "^1.49.0"
+  }
+}

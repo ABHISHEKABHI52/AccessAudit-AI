@@ -27,7 +27,7 @@ import { api } from '../api'
 
    Report (list item): { id (same as scan id), title, url, date }
 
-   API functions: src/api/client.js (real) | src/mock/mockApi.js (fake)
+   API functions: src/api/client.js (real backend)
    ============================================================ */
 
 // Scan "scanning" ho to har 1.5 sec mein dobara check karo

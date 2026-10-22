@@ -1,7 +1,3 @@
-import * as mock from '../mock/mockApi'
-import * as real from './client'
-
-// true = fake demo data, false = asli backend
-const USE_MOCK = true
-
-export const api = USE_MOCK ? mock : real
+// Real backend API only. The mock/demo implementation has been removed;
+// every call goes to the Express backend in backend/ via src/api/client.js.
+export * as api from './client'
